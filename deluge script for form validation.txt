@@ -1,0 +1,30 @@
+﻿daysOff = Employee_Form[ID == input.Employee_Name].Vacation_Days_Taken;
+if(input.Number_of_Days_Requested + daysOff < 20)
+{
+     Employee_Form[ID == input.Employee_Name].Vacation_Days_Taken = input.Number_of_Days_Requested + daysOff;
+}
+
+employeeRec = Employee_form[ID == input.Employee_Name]; 
+daysOff = employeeRec.Vacation_Days_Taken;
+if(daysOff + input.No_of_days_requested < 20)
+{
+    employeeRec.Vacation_Days_Taken=daysOff + input.No_of_days_requested;
+}
+
+employeeForm = Employee_Form[ID == input.Employee_Name]; // I have moved this assignment outside the if check meant for approved status. If this line is included inside the if check and if the status is not approved, then the employeeForm would not be available, which might cause issues.
+
+if(input.Status == "Approved") {
+  daysOff=employeeForm.Vacation_Days_Taken; 
+  daysTaken=input.Number_of_Days_Requested + daysOff;
+
+  // This check is missing
+  if(daystaken < 20){
+    employeeForm.Vacation_Days_Taken=daysTaken;
+    sendmail 
+    [from:zoho.adminuserid
+     to:Employee_Form[ID == input.Employee_Name].email
+     subject:"Your Request Has Been Approved"
+     ....
+    ]
+  }
+}
